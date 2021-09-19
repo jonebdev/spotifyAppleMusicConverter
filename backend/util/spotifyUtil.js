@@ -1,7 +1,5 @@
 const axios = require('axios')
 
-
-
 module.exports = {
   async getClientCredentialsToken() {
     const request = await axios({

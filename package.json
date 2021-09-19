@@ -1,0 +1,26 @@
+{
+  "name": "spotifyapplemusicconverter",
+  "version": "1.0.0",
+  "description": "This is a spotify to apple music converter I am working on.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  },
+  "scripts": {
+    "setup": "cd backend && npm i %% cd ../frontend && npm i",
+    "client": "cd frontend && npm start",
+    "server": "cd backend && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joneb-dev/spotifyAppleMusicConverter.git"
+  },
+  "author": "jonathan botros",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joneb-dev/spotifyAppleMusicConverter/issues"
+  },
+  "homepage": "https://github.com/joneb-dev/spotifyAppleMusicConverter#readme"
+}

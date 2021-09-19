@@ -2,7 +2,7 @@ const axios = require('axios')
 const spotifyUtil = require('../../util/spotifyUtil')
 
 module.exports ={
-  async searchSpotify(searchQuery){
+  async searchSpotify(searchQuery) {
     const bearerToken = await spotifyUtil.getClientCredentialsToken()
 
     const requestUrl = new URL(`${process.env.SPOTIFY_URL}/search`)
@@ -10,16 +10,39 @@ module.exports ={
     requestUrl.searchParams.append('type', 'track')
     requestUrl.searchParams.append('market', 'US')
 
-    const options = {
-      method: 'get',
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': `Bearer ${bearerToken}`
+    try {
+      const options = {
+        method: 'get',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${bearerToken}`
+        }
       }
+      const request = await axios(requestUrl.href, options)
+      
+      return request.data
+    } catch (error){
+      return error.message
     }
+  }, 
+  async getPlaylist(playlistId) {
+    const bearerToken = await spotifyUtil.getClientCredentialsToken()
 
-    const request = await axios(requestUrl.href, options)
+    const requestUrl = new URL(`${process.env.SPOTIFY_URL}/playlists/${playlistId}`)
 
-    return request.data
-  }
+    try {
+      const options = {
+        method: 'get',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${bearerToken}`
+        }
+      }
+      const request = await axios(requestUrl.href, options)
+      
+      return request.data
+    } catch (error){
+      return error.message
+    }
+  },
 }
