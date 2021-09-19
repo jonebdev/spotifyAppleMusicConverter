@@ -12,8 +12,6 @@ search.get('/', async (req, res) =>{
   res.send(result)
 })
 
-
-
 module.exports = search
 
 

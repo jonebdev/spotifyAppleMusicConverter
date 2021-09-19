@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MusicProvider from './core/MusicProvider';
+
+
+let musicProvider = MusicProvider.sharedProvider();
+musicProvider.configure()
+let musicInstance = musicProvider.getMusicInstance();
+musicInstance.authorize().then(musicUserToken => {
+  // temporary 
+  console.log(musicUserToken);
+});
+
+console.log(musicInstance)
 
 ReactDOM.render(
   <React.StrictMode>
