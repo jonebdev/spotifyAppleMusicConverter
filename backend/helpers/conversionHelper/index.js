@@ -6,12 +6,12 @@ const appleUserActions = appleHelper.userActions
 const spotifyUserActions = spotifyHelper.userActions
 
 module.exports = {
-  async getAppleSongId(songName){
+  async getAppleSongId(songName) {
     const searchForSong = await searchApple.appleMusicSearch(songName)
     // if i push this to std out this might be a cool way to visualize progress
     console.log(songName)
-    
-    if (searchForSong.results.hasOwnProperty("songs")){
+
+    if (searchForSong.results.hasOwnProperty('songs')) {
       const songId = searchForSong.results.songs.data[0].id
       return songId
     } else {
@@ -19,13 +19,13 @@ module.exports = {
     }
   },
 
-  async convertSpotifyToAppleMusic(playlistId, musicUserToken){
+  async convertSpotifyToAppleMusic(playlistId, musicUserToken) {
     const appleTracksToAdd = []
     const spotifyPlaylist = await searchSpotify.getPlaylist(playlistId)
     const spotifyPlaylistProperties = {
       name: spotifyPlaylist.name,
       description: spotifyPlaylist.description,
-      artwork: spotifyPlaylist.images[0].url
+      artwork: spotifyPlaylist.images[0].url,
     }
     const tracksInPlaylist = spotifyPlaylist.tracks.items
 
@@ -35,10 +35,10 @@ module.exports = {
       const query = `${trackName} ${artist}`
       const appleTrackId = await this.getAppleSongId(query)
 
-      if (appleTrackId !== null){
+      if (appleTrackId !== null) {
         const trackData = {
           id: appleTrackId,
-          type: "songs"
+          type: 'songs',
         }
         appleTracksToAdd.push(trackData)
       } else {
@@ -47,8 +47,12 @@ module.exports = {
     }
 
     // create playlist with attributes and songs
-    const createdPlaylist = await appleUserActions.createApplePlaylist(spotifyPlaylistProperties, appleTracksToAdd, musicUserToken)
-    
+    const createdPlaylist = await appleUserActions.createApplePlaylist(
+      spotifyPlaylistProperties,
+      appleTracksToAdd,
+      musicUserToken
+    )
+
     return createdPlaylist
-  }
+  },
 }

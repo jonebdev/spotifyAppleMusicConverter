@@ -1,5 +1,5 @@
-const axios = require("axios")
-const appleUtil = require("../../util/appleUtil")
+const axios = require('axios')
+const appleUtil = require('../../util/appleUtil')
 
 module.exports = {
   async createApplePlaylist(
@@ -16,7 +16,7 @@ module.exports = {
       attributes: {
         name: playlistAttributes.name,
         description: playlistAttributes.description,
-        artwork: playlistAttributes.artwork
+        artwork: playlistAttributes.artwork,
       },
       relationships: {
         tracks: {
@@ -30,17 +30,16 @@ module.exports = {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
-        'Authorization': `Bearer ${developerToken}`,
-        'Music-User-Token': musicUserToken
+        Authorization: `Bearer ${developerToken}`,
+        'Music-User-Token': musicUserToken,
       },
-      data: requestBody
+      data: requestBody,
     }
 
-    try{
+    try {
       const request = await axios(requestUrl.href, options)
       return request.data
-    }
-    catch(err){
+    } catch (err) {
       return err
     }
   },

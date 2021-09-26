@@ -5,13 +5,18 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "concurrently": "^6.2.1"
+    "concurrently": "^6.2.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.1"
   },
   "scripts": {
     "setup": "cd backend && npm i %% cd ../frontend && npm i",
     "client": "cd frontend && npm start",
     "server": "cd backend && npm start",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "format": "prettier --config ./.prettierrc --write .",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -22,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/joneb-dev/spotifyAppleMusicConverter/issues"
   },
-  "homepage": "https://github.com/joneb-dev/spotifyAppleMusicConverter#readme"
+  "homepage": "https://github.com/joneb-dev/spotifyAppleMusicConverter#readme",
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
+  }
 }

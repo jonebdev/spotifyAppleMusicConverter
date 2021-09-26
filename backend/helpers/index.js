@@ -3,5 +3,5 @@ const appleMusicHelper = require('appleMusicHelper')
 
 module.exports = {
   spotifyHelper,
-  appleMusicHelper
+  appleMusicHelper,
 }

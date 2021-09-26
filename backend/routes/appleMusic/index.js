@@ -3,8 +3,7 @@ const search = require('./appleMusicSearch')
 const convert = require('./appleMusicConvertPlaylist')
 const appleUtil = require('../../util/appleUtil')
 
-
-apple.get('/token', (req, res) =>{
+apple.get('/token', (req, res) => {
   const JWT = appleUtil.generateAppleJWT()
   res.send(JWT)
 })

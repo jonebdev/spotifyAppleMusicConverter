@@ -4,10 +4,10 @@ const search = require('./spotifysearch')
 
 // spotify.use('/login', login)
 
-spotify.get('', (req, res) =>{
+spotify.get('', (req, res) => {
   res.send('spotify')
 })
 
 spotify.use('/search', search)
 
-module.exports = spotify;
+module.exports = spotify
