@@ -5,7 +5,7 @@ const spotifySearchHelper = require('../../helpers/spotifyHelper/search')
  * Return a search of spotify for a tracj
  */
 
-search.get('/', async (req, res) =>{
+search.get('/', async (req, res) => {
   const searchQuery = req.query.query
   const result = await spotifySearchHelper.searchSpotify(searchQuery)
 
@@ -13,5 +13,3 @@ search.get('/', async (req, res) =>{
 })
 
 module.exports = search
-
-

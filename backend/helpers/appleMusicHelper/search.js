@@ -1,9 +1,9 @@
 const axios = require('axios')
 const appleUtil = require('../../util/appleUtil')
 
-module.exports ={
-  async appleMusicSearch (searchQuery, developerToken = null){
-    if (!developerToken){
+module.exports = {
+  async appleMusicSearch(searchQuery, developerToken = null) {
+    if (!developerToken) {
       developerToken = appleUtil.generateAppleJWT()
     }
 
@@ -17,15 +17,15 @@ module.exports ={
         method: 'get',
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${developerToken}`
-        }
+          Authorization: `Bearer ${developerToken}`,
+        },
       }
 
-      const request = await axios(requestUrl.href, options)  
+      const request = await axios(requestUrl.href, options)
 
       return request.data
-    } catch( error ){
+    } catch (error) {
       return error.message
     }
-  }
+  },
 }

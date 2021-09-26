@@ -5,5 +5,5 @@ const userActions = require('./userActions')
 module.exports = {
   oauth,
   search,
-  userActions
+  userActions,
 }
