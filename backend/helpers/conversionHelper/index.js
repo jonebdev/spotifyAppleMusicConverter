@@ -25,8 +25,9 @@ module.exports = {
     const spotifyPlaylistProperties = {
       name: spotifyPlaylist.name,
       description: spotifyPlaylist.description,
-      artwork: spotifyPlaylist.images[0].url,
+      // artwork: spotifyPlaylist.images[0].url,
     }
+
     const tracksInPlaylist = spotifyPlaylist.tracks.items
 
     for (const item of tracksInPlaylist) {
