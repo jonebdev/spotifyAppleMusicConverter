@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
-app.use('/', routes)
+app.use('/api/v1', routes)
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
