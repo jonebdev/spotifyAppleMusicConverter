@@ -8,7 +8,6 @@ module.exports = {
     const requestBody = {
       name: playlistName,
       description: description,
-      public: false,
     }
 
     const options = {
@@ -28,9 +27,9 @@ module.exports = {
     }
   },
 
-  async addItemsToPlaylist(userId, oauthToken, playlistId, uris) {
+  async addItemsToPlaylist(oauthToken, playlistId, uris) {
     const requestUrl = new URL(
-      `${process.env.SPOTIFY_URL}/${playlistId}/tracks`
+      `${process.env.SPOTIFY_URL}/playlists/${playlistId}/tracks`
     )
     const requestBody = {
       uris: uris,
