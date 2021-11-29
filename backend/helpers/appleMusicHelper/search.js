@@ -28,4 +28,30 @@ module.exports = {
       return error.message
     }
   },
+
+  async getApplePlaylist(playlistId, developerToken = null) {
+    if (!developerToken) {
+      developerToken = appleUtil.generateAppleJWT()
+    }
+
+    const requestUrl = new URL(
+      `${process.env.APPLE_URL}/catalog/us/playlists/${playlistId}`
+    )
+
+    try {
+      const options = {
+        method: 'get',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${developerToken}`,
+        },
+      }
+
+      const request = await axios(requestUrl.href, options)
+
+      return request.data
+    } catch (error) {
+      return error.message
+    }
+  },
 }

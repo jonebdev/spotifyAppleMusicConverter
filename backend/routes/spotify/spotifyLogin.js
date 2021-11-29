@@ -2,7 +2,6 @@ const spotifyLogin = require('express').Router()
 const { oauth } = require('./../../helpers/spotifyHelper')
 const { generateRandomString, spotifyUtil } = require('../../util')
 const axios = require('axios')
-const fetch = require('node-fetch')
 const redirect_uri = process.env.CALLBACK_URL
 const querystring = require('querystring')
 const stateKey = 'spotify_auth_state'
@@ -54,7 +53,7 @@ spotifyLogin.get('/callback', async (req, res) => {
 
   const body = {
     grant_type: 'authorization_code',
-    code: req.query.code,
+    code: code,
     redirect_uri: redirect_uri,
     client_id: process.env.SPOTIFY_CLIENT_ID,
     client_secret: process.env.SPOTIFY_CLIENT_SECRET,
