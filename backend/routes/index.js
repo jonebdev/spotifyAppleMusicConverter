@@ -5,4 +5,8 @@ const apple = require('./appleMusic')
 routes.use('/spotify', spotify)
 routes.use('/appleMusic', apple)
 
+routes.get('/', function (req, res) {
+  res.send({ foo: 'bar' })
+})
+
 module.exports = routes

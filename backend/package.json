@@ -17,7 +17,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "form-data": "^4.0.0",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "nock": "^13.1.3",
