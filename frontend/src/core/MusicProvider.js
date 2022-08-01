@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default class MusicProvider {
   static sharedProvider() {
     if (!MusicProvider.instance) {
@@ -6,9 +7,9 @@ export default class MusicProvider {
     return MusicProvider.instance
   }
 
-  configure() {
+  async configure(token) {
     window.MusicKit.configure({
-      developerToken: process.env.REACT_APP_APPLE_DEVELOPER_TOKEN,
+      developerToken: token,
       app: {
         name: 'phantaa',
         build: '2021.9.16',

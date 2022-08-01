@@ -63,14 +63,14 @@ spotifyLogin.get('/callback', async (req, res) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Accept: 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
     data: encodeFormData(body),
   })
 
   res.cookie(spotifyOathTokenCookie, request.data.access_token)
   res.cookie(spotifyRefreshTokenCookie, request.data.refresh_token)
-  res.send(request.data)
+  res.redirect(`${process.env.FRONT_END_URL}/apple`)
 })
 
 module.exports = spotifyLogin
