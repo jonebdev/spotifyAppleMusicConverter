@@ -42,7 +42,11 @@ module.exports = {
       }
       const request = await axios(requestUrl.href, options)
 
-      return request.data
+      if (request.status === 200) {
+        return request.data
+      } else {
+        throw new Error(`Request failed with status ${request.status}`)
+      }
     } catch (error) {
       return error.message
     }

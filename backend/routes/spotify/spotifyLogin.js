@@ -7,6 +7,7 @@ const querystring = require('querystring')
 const stateKey = 'spotify_auth_state'
 const spotifyOathTokenCookie = 'spotify_oauth_token_cookie'
 const spotifyRefreshTokenCookie = 'spotify_refresh_token_cookie'
+const userId = 'user_id'
 
 // this can be used as a seperate module
 const encodeFormData = (data) => {
@@ -68,9 +69,22 @@ spotifyLogin.get('/callback', async (req, res) => {
     data: encodeFormData(body),
   })
 
+  const getUserUrl = new URL('https://api.spotify.com/v1/me')
+
+  const userDetails = await axios(getUserUrl.href, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${request.data.access_token}`,
+    },
+  })
+
   res.cookie(spotifyOathTokenCookie, request.data.access_token)
   res.cookie(spotifyRefreshTokenCookie, request.data.refresh_token)
+  res.cookie(userId, userDetails.data.id)
+
   res.redirect(`${process.env.FRONT_END_URL}/apple`)
+  // res.send(request.data)
 })
 
 module.exports = spotifyLogin
