@@ -88,6 +88,9 @@ module.exports = {
       // artwork: spotifyPlaylist.images[0].url,
     }
 
+    console.log('eeee ', spotifyPlaylist)
+    console.log(spotifyPlaylist.tracks)
+
     const tracksInPlaylist = spotifyPlaylist.tracks.items
 
     for (const item of tracksInPlaylist) {

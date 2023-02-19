@@ -7,8 +7,9 @@ export default function Home() {
 
   return (
     <>
-      <a href={oauth}>convert from spotify to apple </a>
-      <Link to="/spotify">convert from apple to spotify </Link>
+      <a href={oauth}>Login With Spotify </a>
+      <br></br>
+      <Link to="/spotify">Login With Apple </Link>
     </>
   )
 }
