@@ -1,7 +1,7 @@
 {
   "name": "spotify-apple-music-converter-front-end",
   "version": "0.1.0",
-  "proxy":"http://localhost:8080",
+  "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
@@ -15,7 +15,7 @@
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.1",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^1.1.2"
   },
@@ -42,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
   }
 }

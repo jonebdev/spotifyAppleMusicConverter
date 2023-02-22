@@ -45,8 +45,19 @@ export default function SpotifyToApple() {
         }}
       >
         <Form>
-          enter the playlist url <Field name="playlistData.playlistId" />
-          <button type="submit">Submit</button>
+          <h3 className="text-lg font-semibold mb-2">
+            Enter the Apple Music Playlist URL
+          </h3>
+          <Field
+            className="border shadow rounded-md w-full py-2 px-3 mb-2"
+            name="playlistData.playlistId"
+          />
+          <button
+            className="bg-teal-400 my-2 ring ring-teal-300 hover:ring-teal-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2"
+            type="submit"
+          >
+            Submit
+          </button>
         </Form>
       </Formik>
     </>

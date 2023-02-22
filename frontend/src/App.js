@@ -11,15 +11,17 @@ function App(musicInstance) {
 
   return (
     <>
-      <CookiesProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/apple" element={<SpotifyToApple />} />
-            <Route path="/spotify" element={<AppleToSpotify />} />
-          </Routes>
-        </BrowserRouter>
-      </CookiesProvider>
+      <div className="md:container md:mx-auto py-4">
+        <CookiesProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/apple" element={<SpotifyToApple />} />
+              <Route path="/spotify" element={<AppleToSpotify />} />
+            </Routes>
+          </BrowserRouter>
+        </CookiesProvider>
+      </div>
     </>
   )
 }
