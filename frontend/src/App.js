@@ -8,8 +8,8 @@ import Home from './Components/Home'
 function App(musicInstance) {
   return (
     <>
-      <div className="bg-gradient-to-b from-gray-800 to-gray-500 min-h-screen">
-        <div className="md:container md:mx-auto bg-slate-100 rounded-lg shadow-lg outline-1 p-4">
+      <div className="bg-gradient-to-b from-gray-800 to-gray-500 min-h-screen ">
+        <div className="md:container md:mx-auto bg-slate-100 rounded-lg shadow-lg outline-1 p-4 translate-y-64 mx-4">
           <CookiesProvider>
             <BrowserRouter>
               <Routes>
