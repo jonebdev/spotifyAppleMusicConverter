@@ -42,6 +42,8 @@ export default function SpotifyToApple() {
             method: 'post',
             data: values.playlistData,
           })
+
+          console.log(convertPlaylist.data)
         }}
       >
         <Form>

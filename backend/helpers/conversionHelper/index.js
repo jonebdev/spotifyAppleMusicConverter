@@ -71,11 +71,15 @@ module.exports = {
     }
 
     // add songs to playlist
-    const songsAddedToConvertedPlaylist = spotifyUserActions.addItemsToPlaylist(
-      oauthToken,
-      spotifyPlaylistId,
-      spotifyUrisToAdd
-    )
+    const songsAddedToConvertedPlaylist =
+      await spotifyUserActions.addItemsToPlaylist(
+        oauthToken,
+        spotifyPlaylistId,
+        spotifyUrisToAdd
+      )
+
+    console.log(songsAddedToConvertedPlaylist)
+
     return songsAddedToConvertedPlaylist
   },
 

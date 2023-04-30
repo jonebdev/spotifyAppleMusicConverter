@@ -9,7 +9,7 @@ search.get('/', async (req, res) => {
   const searchQuery = req.query.query
   const result = await spotifySearchHelper.searchSpotify(searchQuery)
 
-  res.send(result)
+  res.status(200).json(result)
 })
 
 module.exports = search

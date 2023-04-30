@@ -10,7 +10,9 @@ convert.post('/', async (req, res) => {
     musicUserToken
   )
 
-  res.send(convertedPlaylist)
+  console.log('what im sending', JSON.stringify(convertedPlaylist))
+
+  res.status(201).json(convertedPlaylist)
 })
 
 module.exports = convert
