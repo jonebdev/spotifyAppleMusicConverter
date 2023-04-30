@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { Cookies } from 'react-cookie'
 import axios from 'axios'
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function SpotifyToApple() {
   let navigate = useNavigate()
+  let [isSubmitting, setIsSubmitting] = useState(false)
   const cookies = new Cookies()
   const token = cookies.get('spotify_oauth_token_cookie')
   const userId = cookies.get('user_id')
@@ -13,37 +14,50 @@ export default function SpotifyToApple() {
 
   // for debugging purposes
   // TODO: take this out
-  console.log(token)
+  // console.log(token)
 
-  // TODO: fix this bc it does not work
-  if (token === undefined) {
-    navigate('/')
-  }
+  useEffect(() => {
+    const checkToken = () => {
+      if (token === undefined) {
+        navigate('/')
+      }
+    }
+    checkToken()
+  }, [])
 
   return (
     <>
       <Formik
         initialValues={{
           playlistData: {
-            userId: '',
             playlistId: '',
-            oauthToken: '',
           },
         }}
         onSubmit={async (values) => {
-          console.log(cookies)
-          values.playlistData.userId = userId
-          values.playlistData.oauthToken = token
+          const payload = {
+            userId,
+            oauthToken: token,
+            playlistId: '',
+          }
           const playlistArr = values.playlistData.playlistId.split('/')
-          values.playlistData.playlistId = playlistArr[playlistArr.length - 1]
-          console.log(values)
+          payload.playlistId = playlistArr[playlistArr.length - 1]
+          console.log(payload)
 
           const convertPlaylist = await axios(url.href, {
             method: 'post',
-            data: values.playlistData,
+            data: payload,
           })
 
           console.log(convertPlaylist.data)
+
+          if (convertPlaylist.status === 201) {
+            navigate('/spotify/success', {
+              state: {
+                playlistUrl: convertPlaylist.data.external_urls.spotify,
+                tracks: convertPlaylist.data.tracks,
+              },
+            })
+          }
         }}
       >
         <Form>

@@ -78,9 +78,11 @@ module.exports = {
         spotifyUrisToAdd
       )
 
-    console.log(songsAddedToConvertedPlaylist)
+    const convertedPlaylist = await searchSpotify.getPlaylist(
+      spotifyCreatedPlaylist.id
+    )
 
-    return songsAddedToConvertedPlaylist
+    return convertedPlaylist
   },
 
   async convertSpotifyToAppleMusic(playlistId, musicUserToken) {

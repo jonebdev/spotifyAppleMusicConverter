@@ -10,7 +10,7 @@ export default function AppleToSpotify() {
   const [cookies, setCookie] = useCookies(['musicUserToken'])
   const url = new URL(`${process.env.REACT_APP_BACKEND_API}/appleMusic/convert`)
 
-  const token = axios
+  axios
     .get(`${process.env.REACT_APP_BACKEND_API}/appleMusic/token`)
     .then((res) => {
       const devToken = res.data.token
@@ -44,12 +44,11 @@ export default function AppleToSpotify() {
           values.playlistData.playlistId =
             playlistArr[playlistArr.length - 1].split('?')[0]
 
-          console.log(values)
-
           const convertPlaylist = await axios(url.href, {
             method: 'post',
             data: values.playlistData,
           })
+
           console.log(convertPlaylist.data)
         }}
       >
