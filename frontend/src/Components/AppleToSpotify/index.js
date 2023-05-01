@@ -49,6 +49,15 @@ export default function AppleToSpotify() {
             data: values.playlistData,
           })
 
+          if (convertPlaylist.status === 201) {
+            navigate('/apple/success', {
+              state: {
+                playlistId: convertPlaylist.data.data[0].id,
+                name: convertPlaylist.data.data[0].attributes.name,
+              },
+            })
+          }
+
           console.log(convertPlaylist.data)
         }}
       >
