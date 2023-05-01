@@ -48,13 +48,10 @@ export default function SpotifyToApple() {
             data: payload,
           })
 
-          console.log(convertPlaylist.data)
-
           if (convertPlaylist.status === 201) {
             navigate('/spotify/success', {
               state: {
-                playlistUrl: convertPlaylist.data.external_urls.spotify,
-                tracks: convertPlaylist.data.tracks,
+                playlistId: convertPlaylist.data.id,
               },
             })
           }
