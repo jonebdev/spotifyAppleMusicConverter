@@ -71,12 +71,18 @@ module.exports = {
     }
 
     // add songs to playlist
-    const songsAddedToConvertedPlaylist = spotifyUserActions.addItemsToPlaylist(
-      oauthToken,
-      spotifyPlaylistId,
-      spotifyUrisToAdd
+    const songsAddedToConvertedPlaylist =
+      await spotifyUserActions.addItemsToPlaylist(
+        oauthToken,
+        spotifyPlaylistId,
+        spotifyUrisToAdd
+      )
+
+    const convertedPlaylist = await searchSpotify.getPlaylist(
+      spotifyCreatedPlaylist.id
     )
-    return songsAddedToConvertedPlaylist
+
+    return convertedPlaylist
   },
 
   async convertSpotifyToAppleMusic(playlistId, musicUserToken) {

@@ -25,6 +25,7 @@ module.exports = {
       return error.message
     }
   },
+
   async getPlaylist(playlistId) {
     const bearerToken = await spotifyUtil.getClientCredentialsToken()
 

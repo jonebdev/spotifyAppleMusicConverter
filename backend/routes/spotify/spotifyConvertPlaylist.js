@@ -12,7 +12,7 @@ convert.post('/', async (req, res) => {
     oauthToken
   )
 
-  res.send(convertedPlaylist)
+  res.status(201).json(convertedPlaylist)
 })
 
 module.exports = convert
