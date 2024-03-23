@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import MusicProvider from '../../core/MusicProvider'
 import { useCookies } from 'react-cookie'
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function AppleToSpotify() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   const [cookies, setCookie] = useCookies(['musicUserToken'])
   const url = new URL(`${process.env.REACT_APP_BACKEND_API}/appleMusic/convert`)
 
@@ -44,6 +45,8 @@ export default function AppleToSpotify() {
           values.playlistData.playlistId =
             playlistArr[playlistArr.length - 1].split('?')[0]
 
+          setLoading(true)
+
           const convertPlaylist = await axios(url.href, {
             method: 'post',
             data: values.playlistData,
@@ -72,6 +75,7 @@ export default function AppleToSpotify() {
           <button
             className="bg-red-400 my-2 ring ring-red-300 hover:ring-red-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2"
             type="submit"
+            disabled={loading}
           >
             Submit
           </button>
