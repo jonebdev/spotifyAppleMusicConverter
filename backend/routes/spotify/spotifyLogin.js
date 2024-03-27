@@ -42,49 +42,58 @@ spotifyLogin.get('/callback', async (req, res) => {
 
   console.log('in callback')
 
-  if (state === null) {
-    res.redirect(
-      '/#' +
-        querystring.stringify({
-          error: 'state_mismatch',
-        })
-    )
+  res.clearCookie(spotifyOathTokenCookie)
+  res.clearCookie(spotifyRefreshTokenCookie)
+  res.clearCookie(userId)
+
+  try {
+    if (state === null) {
+      res.redirect(
+        '/#' +
+          querystring.stringify({
+            error: 'state_mismatch',
+          })
+      )
+    }
+    res.clearCookie(stateKey)
+
+    const body = {
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: redirect_uri,
+      client_id: process.env.SPOTIFY_CLIENT_ID,
+      client_secret: process.env.SPOTIFY_CLIENT_SECRET,
+    }
+
+    const request = await axios(requestUrl.href, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': '*',
+      },
+      data: encodeFormData(body),
+    })
+
+    const getUserUrl = new URL('https://api.spotify.com/v1/me')
+
+    const userDetails = await axios(getUserUrl.href, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${request.data.access_token}`,
+      },
+    })
+
+    res.cookie(spotifyOathTokenCookie, request.data.access_token)
+    res.cookie(spotifyRefreshTokenCookie, request.data.refresh_token)
+    res.cookie(userId, userDetails.data.id)
+
+    res.redirect(`${process.env.FRONT_END_URL}/apple`)
+    // res.send(request.data)
+  } catch (err) {
+    console.log('Unauthorized', err.response.data)
+    res.status(401).json({ message: err.response.data })
   }
-  res.clearCookie(stateKey)
-
-  const body = {
-    grant_type: 'authorization_code',
-    code: code,
-    redirect_uri: redirect_uri,
-    client_id: process.env.SPOTIFY_CLIENT_ID,
-    client_secret: process.env.SPOTIFY_CLIENT_SECRET,
-  }
-
-  const request = await axios(requestUrl.href, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Access-Control-Allow-Origin': '*',
-    },
-    data: encodeFormData(body),
-  })
-
-  const getUserUrl = new URL('https://api.spotify.com/v1/me')
-
-  const userDetails = await axios(getUserUrl.href, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${request.data.access_token}`,
-    },
-  })
-
-  res.cookie(spotifyOathTokenCookie, request.data.access_token)
-  res.cookie(spotifyRefreshTokenCookie, request.data.refresh_token)
-  res.cookie(userId, userDetails.data.id)
-
-  res.redirect(`${process.env.FRONT_END_URL}/apple`)
-  // res.send(request.data)
 })
 
 module.exports = spotifyLogin
